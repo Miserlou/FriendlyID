@@ -1,0 +1,3 @@
+%{
+  "useful": {:hex, :useful, "0.4.0", "549fddfa87f66beba687474c552cecf7790c6f6a4ae83c030840a6bc0ad70046", [:mix], [], "hexpm", "afa5189fc0d89d078b720f7419a8760752cb1e9140b88b8feb591eb12dee9c27"},
+}
