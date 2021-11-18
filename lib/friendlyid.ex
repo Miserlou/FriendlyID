@@ -25,7 +25,7 @@ defmodule FriendlyID do
       "GLEAMING-FAINT-PHILOSOPHY"
 
   """
-  @spec generate(pos_integer, keyword) :: binary
+  @spec generate(pos_integer, list) :: binary
   def generate(size, options \\ []) when is_integer(size) and size > 0 do
 
     default = [transform: &:string.titlecase/1, separator: ""]
