@@ -23,7 +23,7 @@ The package can be installed by adding `friendlyid` to your list of dependencies
 ```elixir
 def deps do
   [
-    {:friendlyid, "~> 0.1.1"}
+    {:friendlyid, "~> 0.2.0"}
   ]
 end
 ```

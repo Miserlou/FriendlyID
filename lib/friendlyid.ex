@@ -3,7 +3,8 @@ defmodule FriendlyID do
   Documentation for `FriendlyID`.
   """
 
-  # XXX: Should word lists be stored here, or loaded every time, or.. ?
+  @predicates Path.join(:code.priv_dir(:friendlyid), "predicates.txt") |> File.read!() |> String.split("\n", trim: true)
+  @objects Path.join(:code.priv_dir(:friendlyid), "objects.txt") |> File.read!() |> String.split("\n", trim: true)
 
   @doc """
   Generates a friendly ID of a given length.
@@ -25,21 +26,14 @@ defmodule FriendlyID do
       "GLEAMING-FAINT-PHILOSOPHY"
 
   """
-  @spec generate(pos_integer, list) :: binary
+  @spec generate(pos_integer, keyword) :: binary
   def generate(size, options \\ []) when is_integer(size) and size > 0 do
-
     default = [transform: &:string.titlecase/1, separator: ""]
     options = Keyword.merge(default, options)
 
-    {:ok, predicates} = File.read(Path.join(:code.priv_dir(:friendlyid), "predicates.txt"))
-    predicates_list = predicates |> String.split("\n", trim: true)
-
-    {:ok, objects} = File.read(Path.join(:code.priv_dir(:friendlyid), "objects.txt"))
-    objects_list = objects |> String.split("\n", trim: true)
-
-    ids = Enum.take_random(predicates_list, size-1) ++ Enum.take_random(objects_list, 1)
-    Enum.join(Enum.map(ids, options[:transform]), options[:separator])
+    Enum.take_random(@predicates, size-1) ++ Enum.take_random(@objects, 1)
+    |> Enum.map(options[:transform])
+    |> Enum.join(options[:separator])
 
   end
-
 end
